@@ -70,6 +70,12 @@ No clipping in the output signal is allowed. Gain should be almost constant for 
 
 Each of the stages were designed individually, with calculated values which were then tweaked in the simulation according to the required specifications and the availability of components in the lab. The 2N3904 transistor were used for the voltage amplifier stages, while the LM741 was used for the buffer stages. The TIP31C and TIP32C were used in the power amplifier design.
 
+### Microphone
+
+The microphone has to be biased with separate circuitry to ensure that the input waveform is within the input range of the amplifier. The following circuit was used to bias the microphone.
+
+![Microphone biasing circuit](michardware.jpg)
+
 ### 3.1 Preamplifier Stage
 
 The preamplifier stage is the first stage after the microphone, so it recieves the raw noisy small signal as input. We prefer a differntial amplifier due to its noise rejecting properties in the differential mode of operation, while also providing us a reasonable amount of gain. For a differential amplifier, we have
@@ -124,7 +130,7 @@ $$A_v = -\frac{g_mR_C}{2} = 108.6$$
 
 ![Circuit diagram of the preamplifier stage as constructed in LTSpice](diffamp_circ.png)
 
-As calculated, we observe a gain of around 102 in the simulation, which can be seen in the output plot (fig 2.) given below.
+As calculated, we observe a gain of around 102 in the simulation, which can be seen in the output plot (fig 3.) given below.
 
 ![Input and output voltage plot, green is input voltage (20mV p-p, 2kHz), blue is output voltage (2.04V p-p, 2kHz)](diffamp_out.png)
 
@@ -164,6 +170,10 @@ The output after both the preamplifier cascaded with the gain stage for a 20mV p
 
 We see a 14.1V p-p sinusoid as the output waveform, which corresponds to a gain of around 705 with both the stages combined.
 
+The hardware implementation is shown below.
+
+![Hardware implementation of the gain stage](gainstagehardware.jpg)
+
 \pagebreak
 
 ### 3.3 Active Filter Stage
@@ -190,11 +200,46 @@ While this filter does let in frequencies slightly above 20kHz, we have done so 
 
 This is exactly what we want for a signal in the passband.
 
+The hardware implementation is shown below.
+
+![Hardware implementation of the filter stage](filterhardware.jpg)
+
 \pagebreak
 
 ### 3.4 Power Amplifier Stage
 
+We have opted for a class AB power amplifier stage for the final stage of the amplifier. We have chosen it because it has a few advantages over class A amplifiers such as being more efficient, while also not having crossover noise like a class B amplifier.
 
+There are two types of distortions in a class B amplifier:
+ 
+- Nonlinear/Harmonic Distortion: Signal frequency as well as subsequent harmonics are present in the output. This is dealt with by using the symmetrical push-pull configuration.
+- Crossover Distortion: This is caused by the switching of the transistors in the push-pull configuration. This is dealt with by setting the operating point slightly above $i_c = 0$, higher than cutoff, to ensure a small trickle current.
+
+The circuit for the power amplifier stage is shown below.
+
+![Circuit for the power amplifier stage](powerampcirc.png)
+
+We have biased the circuit with symmetric resistances to ensure that the diodes drop exactly 0.7 volts each, and the point where the input is taken is kept at 0V, to ensure symmetric operation. To calculate the resistances, we initially took into account our power requirement as shown below.
+
+$$i^2_{rms}R = 2W$$
+
+Assuming R = 8$\Omega$, we require an RMS current of around 500mA. So, $i_{pp} = 0.7072A$. Now using the beta values of the transistors, we can calculate the required resistances. We then fine tuned the values in LTSpice, after which we implemented the circuit in hardware.
+
+We observe the following outputs in LTSpice.
+
+![Output waveform after power amp (blue) and input waveform before power amp (green) in LTSpice](beforeafterpoweramp.png)
+
+![Power waveform](powerload.png)
+
+![RMS power output](powerload2.png)
+
+The hardware implementation of the circuit is shown below.
+
+![Hardware implementation of the power amplifier stage](poweramphardware.jpg)
+
+We observe an output wattage of 1.8W at 2kHz, which is above the required specification.
+
+\pagebreak
 
 ## 4. Final Results and Achieved Specifications
 
