@@ -1,0 +1,46 @@
+Circuit: * Z:\home\karthik\Kassi-Things\ampsave.asc
+
+Warning: Multiple definitions of model "2scr375p" Type: BJT
+Warning: Multiple definitions of model "bc857b" Type: BJT
+Warning: Multiple definitions of model "bc847c" Type: BJT
+Warning: Multiple definitions of model "bc847b" Type: BJT
+Warning: Multiple definitions of model "tip42c" Type: BJT
+Warning: Multiple definitions of model "tip42b" Type: BJT
+Warning: Multiple definitions of model "tip42a" Type: BJT
+Warning: Multiple definitions of model "tip42" Type: BJT
+Warning: Multiple definitions of model "tip41c" Type: BJT
+Warning: Multiple definitions of model "tip41b" Type: BJT
+Warning: Multiple definitions of model "tip41a" Type: BJT
+Warning: Multiple definitions of model "tip41" Type: BJT
+Warning: Multiple definitions of model "tip32c" Type: BJT
+Warning: Multiple definitions of model "tip32b" Type: BJT
+Warning: Multiple definitions of model "tip32a" Type: BJT
+Warning: Multiple definitions of model "tip32" Type: BJT
+Warning: Multiple definitions of model "tip31c" Type: BJT
+Warning: Multiple definitions of model "tip31b" Type: BJT
+Warning: Multiple definitions of model "tip31a" Type: BJT
+Warning: Multiple definitions of model "tip31" Type: BJT
+WARNING: Node NC_02 is floating.
+
+WARNING: Less than two connections to node NC_01.  This node is used by V11.
+WARNING: Less than two connections to node NC_02.  This node is used by C13.
+Direct Newton iteration for .op point succeeded.
+
+Date: Wed Feb 22 23:11:18 2023
+Total elapsed time: 0.177 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 2137
+traniter = 2125
+tranpoints = 1054
+accept = 1051
+rejected = 3
+matrix size = 127
+fillins = 152
+solver = Normal
+Thread vector: 7.2/5.7[2] 2.2/2.5[1] 1.9/2.1[1] 0.6/2.4[1]  2592/500
+Matrix Compiler1: 16.04 KB object code size  2.4/1.5/[0.8]
+Matrix Compiler2: 13.08 KB object code size  1.1/1.3/[1.1]
+
